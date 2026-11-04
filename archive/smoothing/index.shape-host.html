@@ -1,0 +1,1274 @@
+<!doctype html>
+<html lang="zh-CN" class="dark" data-palette="green">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="description" content="Wulon UI: a reusable token and component layer for Caddy Wulon apps." />
+    <title>Wulon UI · Component Library</title>
+    <link rel="stylesheet" href="./wulon.css" />
+    <link rel="stylesheet" href="./motion.css" />
+    <script src="./i18n.js" defer></script>
+    <script src="./wulon.js" defer></script>
+    <script src="./motion.js" defer></script>
+  <script src="./vendor/lisse/path.js" defer></script>
+  <script src="./squircle.js" defer></script>
+  </head>
+  <body>
+    <svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden">
+      <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
+      <symbol id="i-palette" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18h1.4a1.8 1.8 0 0 0 0-3.6h-.7a1.5 1.5 0 0 1 0-3h3.1A3.2 3.2 0 0 0 19 11.2 8.2 8.2 0 0 0 12 3Z"/><circle cx="7.5" cy="10.5" r=".8"/><circle cx="10" cy="7" r=".8"/><circle cx="14" cy="7" r=".8"/></symbol>
+      <symbol id="i-type" viewBox="0 0 24 24"><path d="M4 6V4h16v2"/><path d="M12 4v16"/><path d="M8 20h8"/></symbol>
+      <symbol id="i-ruler" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="8" rx="2"/><path d="M7 8v3M11 8v5M15 8v3M19 8v5"/></symbol>
+      <symbol id="i-square" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/></symbol>
+      <symbol id="i-input" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 12h4"/></symbol>
+      <symbol id="i-tag" viewBox="0 0 24 24"><path d="M20 13 13 20l-9-9V4h7l9 9Z"/><circle cx="8" cy="8" r="1"/></symbol>
+      <symbol id="i-card" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></symbol>
+      <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5 5-2Z"/></symbol>
+      <symbol id="i-message" viewBox="0 0 24 24"><path d="M20 15a3 3 0 0 1-3 3H8l-4 3V6a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v9Z"/></symbol>
+      <symbol id="i-table" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M9 4v16"/></symbol>
+      <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5"/><path d="m3 16 9 5 9-5"/></symbol>
+      <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="9" cy="6" r="2"/><circle cx="15" cy="12" r="2"/><circle cx="8" cy="18" r="2"/></symbol>
+      <symbol id="i-motion" viewBox="0 0 24 24"><path d="M3 12h3l2.2-6.5L13 18l2.4-6H21"/></symbol>
+      <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+      <symbol id="i-check-box" viewBox="0 0 24 24"><path pathLength="1" d="m4 12.5 5.5 6L20 5.5"/></symbol>
+      <symbol id="i-check-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.5 2.5L16 9"/></symbol>
+      <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 4 3 20h18L12 4Z"/><path d="M12 9v5"/><circle cx="12" cy="17" r=".7" fill="currentColor" stroke="none"/></symbol>
+      <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><circle cx="12" cy="8" r=".7" fill="currentColor" stroke="none"/></symbol>
+      <symbol id="i-x" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></symbol>
+      <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/></symbol>
+      <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v10"/><path d="m8 10 4 4 4-4"/><path d="M4 19h16"/></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+      <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m7 9 5 5 5-5"/></symbol>
+      <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18"/><path d="M12 3a14 14 0 0 0 0 18"/></symbol>
+      <symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-2.8 2.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.2h-4v-.2a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1L4 17l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.6-1H2.6v-4h.2a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9L4 7l2.8-2.8.1.1a1.7 1.7 0 0 0 1.9.3 1.7 1.7 0 0 0 1-1.6v-.2h4V3a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1L20 7l-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.6 1h.2v4h-.2a1.7 1.7 0 0 0-1.8 1Z"/></symbol>
+      <symbol id="i-server" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="6" rx="2"/><rect x="3" y="14" width="18" height="6" rx="2"/><path d="M7 7h.01M7 17h.01"/></symbol>
+      <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0"/><path d="M16 5a3 3 0 0 1 0 6M18 14a5 5 0 0 1 3 6"/></symbol>
+      <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></symbol>
+      <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V5h6v2M6 7l1 13h10l1-13"/><path d="M10 11v5M14 11v5"/></symbol>
+      <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14-4L4 9"/><path d="M4 5v4h4"/><path d="M4 13a8 8 0 0 0 14 4l2-2"/><path d="M20 19v-4h-4"/></symbol>
+      <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7L8 5Z"/></symbol>
+      <symbol id="i-terminal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="m7 9 3 3-3 3M13 15h4"/></symbol>
+      <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+      <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 15.2A8.5 8.5 0 0 1 8.8 4 8.5 8.5 0 1 0 20 15.2Z"/></symbol>
+      <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M4 12h15"/><path d="m14 7 5 5-5 5"/></symbol>
+      <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol>
+      <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 3 1.5 5.5L19 10l-5.5 1.5L12 17l-1.5-5.5L5 10l5.5-1.5L12 3Z"/><path d="m19 16 .7 2.3L22 19l-2.3.7L19 22l-.7-2.3L16 19l2.3-.7L19 16Z"/></symbol>
+      <symbol id="i-package" viewBox="0 0 24 24"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z"/><path d="m4 7.5 8 4.5 8-4.5M12 12v9"/></symbol>
+      <symbol id="i-hard-drive" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 15h.01M11 15h.01"/></symbol>
+      <symbol id="i-file" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6V3Z"/><path d="M14 3v5h5"/></symbol>
+      <symbol id="i-keyboard" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/></symbol>
+      <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 9a6 6 0 1 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9Z"/><path d="M10 21h4"/></symbol>
+      <symbol id="i-more" viewBox="0 0 24 24"><circle cx="6" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="18" cy="12" r="1" fill="currentColor" stroke="none"/></symbol>
+      <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="M12 20V4"/><path d="m6 10 6-6 6 6"/></symbol>
+      <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></symbol>
+      <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+    </svg>
+
+    <div class="wu-shell">
+      <aside class="wu-sidebar" id="siteSidebar">
+        <div class="wu-sidebar-head">
+          <a class="wu-brand" href="#overview" aria-label="Back to top">
+            <span>
+              <span class="wu-brand-title">Wulon UI</span>
+              <span class="wu-brand-sub">COMPONENT SPEC · 1.0</span>
+            </span>
+          </a>
+          <button class="wu-nav-close" type="button" data-nav-close aria-label="Close navigation">
+            <svg class="wu-icon"><use href="#i-x"/></svg>
+          </button>
+        </div>
+
+        <div class="wu-sidebar-nav">
+        <div class="wu-nav-group">Start</div>
+        <nav class="wu-nav" aria-label="Overview">
+          <a href="#overview" aria-current="true"><svg class="wu-icon"><use href="#i-grid"/></svg>Overview</a>
+        </nav>
+
+        <div class="wu-nav-group">Foundations</div>
+        <nav class="wu-nav" aria-label="Foundations">
+          <a href="#color"><svg class="wu-icon"><use href="#i-palette"/></svg>Color &amp; tea</a>
+          <a href="#type"><svg class="wu-icon"><use href="#i-type"/></svg>Type</a>
+          <a href="#scale"><svg class="wu-icon"><use href="#i-ruler"/></svg>Scale &amp; shadow</a>
+          <a href="#motion"><svg class="wu-icon"><use href="#i-motion"/></svg>Motion</a>
+        </nav>
+
+        <div class="wu-nav-group">Components</div>
+        <nav class="wu-nav" aria-label="Components">
+          <a href="#buttons"><svg class="wu-icon"><use href="#i-square"/></svg>Buttons</a>
+          <a href="#forms"><svg class="wu-icon"><use href="#i-input"/></svg>Forms</a>
+          <a href="#badges"><svg class="wu-icon"><use href="#i-tag"/></svg>Badges</a>
+          <a href="#cards"><svg class="wu-icon"><use href="#i-card"/></svg>Cards</a>
+          <a href="#navigation"><svg class="wu-icon"><use href="#i-compass"/></svg>Navigation</a>
+          <a href="#feedback"><svg class="wu-icon"><use href="#i-message"/></svg>Feedback</a>
+          <a href="#data"><svg class="wu-icon"><use href="#i-table"/></svg>Data</a>
+          <a href="#overlays"><svg class="wu-icon"><use href="#i-layers"/></svg>Overlays</a>
+        </nav>
+
+        <div class="wu-nav-group">Patterns</div>
+        <nav class="wu-nav" aria-label="Patterns">
+          <a href="#patterns"><svg class="wu-icon"><use href="#i-sliders"/></svg>Page patterns</a>
+          <a href="#rules"><svg class="wu-icon"><use href="#i-check"/></svg>Rules</a>
+        </nav>
+
+        </div>
+
+        <div class="wu-sidebar-settings">
+          <div class="wu-sidebar-setting">
+            <span class="wu-sidebar-setting-label">Appearance</span>
+            <div class="wu-segmented" data-segmented role="group" aria-label="Color mode">
+              <button type="button" data-theme-value="light" aria-pressed="false">
+                <svg class="wu-icon"><use href="#i-sun"/></svg>Light
+              </button>
+              <button type="button" data-theme-value="dark" aria-pressed="true">
+                <svg class="wu-icon"><use href="#i-moon"/></svg>Dark
+              </button>
+            </div>
+          </div>
+
+          <div class="wu-sidebar-setting">
+            <span class="wu-sidebar-setting-label">Palette</span>
+            <div class="wu-menu-wrap" data-menu>
+              <button type="button" class="wu-btn wu-btn--secondary wu-btn--sm" data-menu-toggle aria-haspopup="menu" aria-expanded="false">
+                <span class="wu-palette-dot" id="paletteDot" style="background: var(--ds-brand-600)"></span>
+                <span id="paletteLabel">West Lake Green</span>
+                <svg class="wu-icon" style="width: 13px; height: 13px"><use href="#i-chevron"/></svg>
+              </button>
+              <div class="wu-menu" role="menu" hidden>
+                <div class="wu-menu-label">Tea palette</div>
+                <button type="button" class="wu-menu-item" data-palette-value="green" aria-checked="true" role="menuitemradio">
+                  <span class="wu-palette-dot" style="background:#527736"></span>West Lake Green
+                  <svg class="wu-icon wu-menu-check"><use href="#i-check"/></svg>
+                </button>
+                <button type="button" class="wu-menu-item" data-palette-value="white" aria-checked="false" role="menuitemradio">
+                  <span class="wu-palette-dot" style="background:#171717"></span>Silver Needle
+                  <svg class="wu-icon wu-menu-check"><use href="#i-check"/></svg>
+                </button>
+                <button type="button" class="wu-menu-item" data-palette-value="red" aria-checked="false" role="menuitemradio">
+                  <span class="wu-palette-dot" style="background:#9c2f42"></span>Keemun
+                  <svg class="wu-icon wu-menu-check"><use href="#i-check"/></svg>
+                </button>
+                <button type="button" class="wu-menu-item" data-palette-value="yellow" aria-checked="false" role="menuitemradio">
+                  <span class="wu-palette-dot" style="background:#8a5f12"></span>Junshan
+                  <svg class="wu-icon wu-menu-check"><use href="#i-check"/></svg>
+                </button>
+                <button type="button" class="wu-menu-item" data-palette-value="puer" aria-checked="false" role="menuitemradio">
+                  <span class="wu-palette-dot" style="background:#7a5230"></span>Yunnan Puer
+                  <svg class="wu-icon wu-menu-check"><use href="#i-check"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="wu-sidebar-setting">
+            <span class="wu-sidebar-setting-label">Language</span>
+            <div class="wu-menu-wrap wu-lang" data-menu>
+              <button type="button" class="wu-btn wu-btn--secondary wu-btn--sm" id="localeButton" data-menu-toggle aria-haspopup="menu" aria-expanded="false" aria-label="Language">
+                <svg class="wu-icon"><use href="#i-globe"/></svg>
+                <span id="localeLabel" data-i18n-ignore>简体中文</span>
+                <svg class="wu-icon"><use href="#i-chevron"/></svg>
+              </button>
+              <div class="wu-menu" id="localeMenu" role="menu" hidden>
+                <div class="wu-menu-label">Language</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </aside>
+
+      <div class="wu-nav-scrim" data-nav-scrim aria-hidden="true"></div>
+
+      <main class="wu-main">
+        <div class="wu-content">
+          <div class="wu-topbar">
+            <button class="wu-nav-toggle" type="button" data-nav-toggle aria-controls="siteSidebar" aria-expanded="false" aria-label="Open navigation">
+              <svg class="wu-icon"><use href="#i-menu"/></svg>
+            </button>
+            <span class="wu-mobile-title" data-mobile-title>Overview</span>
+            <div class="wu-breadcrumb">
+              WulonSpec
+              <span class="wu-sep">/</span>
+              <span>Component Library</span>
+            </div>
+          </div>
+
+          <header id="overview">
+            <div class="wu-eyebrow">Wulon UI · foundations &amp; components</div>
+            <h1 class="wu-page-title">A quiet interface layer for Caddy Wulon apps.</h1>
+            <p class="wu-page-desc">
+              This library turns the tokens and controls already used in Caddy Wulon desktop and browser products into a small CSS system. The palette, type scale, radii, shadows, focus ring, and component states stay consistent while each product keeps its own content.
+            </p>
+            <div class="wu-row" style="margin-top: 16px">
+              <span class="wu-badge wu-badge--accent"><span class="wu-status-dot"></span>5 tea palettes</span>
+              <span class="wu-badge wu-badge--gray">Light and dark</span>
+              <span class="wu-badge wu-badge--gray">No runtime dependencies</span>
+              <span class="wu-badge wu-badge--green">Used in shipped interfaces</span>
+            </div>
+
+            <div class="wu-grid-3" style="margin-top: 18px">
+              <div class="wu-stat">
+                <div class="wu-stat-label"><svg class="wu-icon"><use href="#i-palette"/></svg>Tea palettes</div>
+                <div class="wu-stat-value">5</div>
+                <div class="wu-stat-foot">Silver Needle, West Lake Green, Keemun, Junshan, Yunnan Puer</div>
+              </div>
+              <div class="wu-stat">
+                <div class="wu-stat-label"><svg class="wu-icon"><use href="#i-moon"/></svg>Token modes</div>
+                <div class="wu-stat-value">2</div>
+                <div class="wu-stat-foot">The same variables recalculate contrast in light and dark mode</div>
+              </div>
+              <div class="wu-stat">
+                <div class="wu-stat-label"><svg class="wu-icon"><use href="#i-square"/></svg>Components</div>
+                <div class="wu-stat-value">18<span style="font-size:13px;color:var(--ds-gray-700)">+</span></div>
+                <div class="wu-stat-foot">Buttons, forms, badges, cards, navigation, feedback, overlays</div>
+              </div>
+            </div>
+          </header>
+
+          <section class="wu-section" id="color">
+            <div class="wu-section-head">
+              <div>
+                <h2 class="wu-section-title">Color &amp; tea</h2>
+                <p class="wu-section-desc">Surfaces, neutrals, brand, and status colors each have a job. A tea palette changes the brand and neutral base; it never changes what success, warning, or danger mean.</p>
+              </div>
+              <span class="wu-section-index">01 / COLOR</span>
+            </div>
+
+            <div class="wu-spec">
+              <div class="wu-spec-label">Surfaces and neutrals <span class="wu-spec-note">Click a swatch to copy its resolved value</span></div>
+              <div class="wu-panel">
+                <div class="wu-swatches">
+                  <button class="wu-swatch" type="button" data-copy-var="--ds-background-100">
+                    <span class="wu-swatch-chip" style="background: var(--ds-background-100)"></span>
+                    <span class="wu-swatch-name">background-100</span>
+                    <span class="wu-swatch-value" data-hex-of="--ds-background-100">#ffffff</span>
+                  </button>
+                  <button class="wu-swatch" type="button" data-copy-var="--ds-background-200">
+                    <span class="wu-swatch-chip" style="background: var(--ds-background-200)"></span>
+                    <span class="wu-swatch-name">background-200</span>
+                    <span class="wu-swatch-value" data-hex-of="--ds-background-200">#f5f7f3</span>
+                  </button>
+                  <button class="wu-swatch" type="button" data-copy-var="--ds-gray-100">
+                    <span class="wu-swatch-chip" style="background: var(--ds-gray-100)"></span>
+                    <span class="wu-swatch-name">gray-100</span>
+                    <span class="wu-swatch-value" data-hex-of="--ds-gray-100">#f0f2ee</span>
+                  </button>
+                  <button class="wu-swatch" type="button" data-copy-var="--ds-gray-300">
+                    <span class="wu-swatch-chip" style="background: var(--ds-gray-300)"></span>
+                    <span class="wu-swatch-name">gray-300</span>
+                    <span class="wu-swatch-value" data-hex-of="--ds-gray-300">#dfe3dc</span>
+                  </button>
+                  <button class="wu-swatch" type="button" data-copy-var="--ds-gray-500">
+                    <span class="wu-swatch-chip" style="background: var(--ds-gray-500)"></span>
+                    <span class="wu-swatch-name">gray-500</span>
+                    <span class="wu-swatch-value" data-hex-of="--ds-gray-500">#b8c0b3</span>
+                  </button>
+                  <button class="wu-swatch" type="button" data-copy-var="--ds-gray-700">
+                    <span class="wu-swatch-chip" style="background: var(--ds-gray-700)"></span>
+                    <span class="wu-swatch-name">gray-700</span>
+                    <span class="wu-swatch-value" data-hex-of="--ds-gray-700">#626b5d</span>
+                  </button>
+                  <button class="wu-swatch" type="button" data-copy-var="--ds-gray-900">
+                    <span class="wu-swatch-chip" style="background: var(--ds-gray-900)"></span>
+                    <span class="wu-swatch-name">gray-900</span>
+                    <span class="wu-swatch-value" data-hex-of="--ds-gray-900">#333b30</span>
+                  </button>
+                  <button class="wu-swatch" type="button" data-copy-var="--ds-gray-1000">
+                    <span class="wu-swatch-chip" style="background: var(--ds-gray-1000)"></span>
+                    <span class="wu-swatch-name">gray-1000</span>
+                    <span class="wu-swatch-value" data-hex-of="--ds-gray-1000">#171c16</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="wu-spec">
+              <div class="wu-spec-label">Brand <span class="wu-spec-note">Reserved for current position, primary action, focus, and progress</span></div>
+              <div class="wu-panel">
+                <div class="wu-swatches">
+                  <button class="wu-swatch" type="button" data-copy-var="--ds-brand-100">
+                    <span class="wu-swatch-chip" style="background: var(--ds-brand-100)"></span>
+                    <span class="wu-swatch-name">brand-100</span>
+                    <span class="wu-swatch-value" data-hex-of="--ds-brand-100">#eef6e8</span>
+                  </button>
+                  <button class="wu-swatch" type="button" data-copy-var="--ds-brand-300">
+                    <span class="wu-swatch-chip" style="background: var(--ds-brand-300)"></span>
+                    <span class="wu-swatch-name">brand-300</span>
+                    <span class="wu-swatch-value" data-hex-of="--ds-brand-300">#c9e1b8</span>
+                  </button>
+                  <button class="wu-swatch" type="button" data-copy-var="--ds-brand-500">
+                    <span class="wu-swatch-chip" style="background: var(--ds-brand-500)"></span>
+                    <span class="wu-swatch-name">brand-500</span>
+                    <span class="wu-swatch-value" data-hex-of="--ds-brand-500">#5f8a42</span>
+                  </button>
+                  <button class="wu-swatch" type="button" data-copy-var="--ds-brand-600">
+                    <span class="wu-swatch-chip" style="background: var(--ds-brand-600)"></span>
+                    <span class="wu-swatch-name">brand-600</span>
+                    <span class="wu-swatch-value" data-hex-of="--ds-brand-600">#527736</span>
+                  </button>
+                  <button class="wu-swatch" type="button" data-copy-var="--ds-brand-700">
+                    <span class="wu-swatch-chip" style="background: var(--ds-brand-700)"></span>
+                    <span class="wu-swatch-name">brand-700</span>
+                    <span class="wu-swatch-value" data-hex-of="--ds-brand-700">#4c7135</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="wu-spec">
+              <div class="wu-spec-label">Status <span class="wu-spec-note">Semantic and independent of the tea palette</span></div>
+              <div class="wu-panel">
+                <div class="wu-swatches">
+                  <button class="wu-swatch" type="button" data-copy-var="--ds-blue-700">
+                    <span class="wu-swatch-chip" style="background: var(--ds-blue-700)"></span>
+                    <span class="wu-swatch-name">blue-700 · Info</span>
+                    <span class="wu-swatch-value" data-hex-of="--ds-blue-700">#1673e8</span>
+                  </button>
+                  <button class="wu-swatch" type="button" data-copy-var="--ds-green-700">
+                    <span class="wu-swatch-chip" style="background: var(--ds-green-700)"></span>
+                    <span class="wu-swatch-name">green-700 · Success</span>
+                    <span class="wu-swatch-value" data-hex-of="--ds-green-700">#4f9a5b</span>
+                  </button>
+                  <button class="wu-swatch" type="button" data-copy-var="--ds-amber-700">
+                    <span class="wu-swatch-chip" style="background: var(--ds-amber-700)"></span>
+                    <span class="wu-swatch-name">amber-700 · Warning</span>
+                    <span class="wu-swatch-value" data-hex-of="--ds-amber-700">#cf8a1c</span>
+                  </button>
+                  <button class="wu-swatch" type="button" data-copy-var="--ds-red-700">
+                    <span class="wu-swatch-chip" style="background: var(--ds-red-700)"></span>
+                    <span class="wu-swatch-name">red-700 · Danger</span>
+                    <span class="wu-swatch-value" data-hex-of="--ds-red-700">#d94e4b</span>
+                  </button>
+                </div>
+                <p class="wu-hint" style="margin-top: 12px">In dark mode the checked track is usually light, so the thumb follows the brand ink color and turns dark. In light mode the same token stays light.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="wu-section" id="type">
+            <div class="wu-section-head">
+              <div>
+                <h2 class="wu-section-title">Type</h2>
+                <p class="wu-section-desc">Sora carries the Latin shapes, a system sans handles Chinese, and Cascadia Code covers paths, versions, and commands.</p>
+              </div>
+              <span class="wu-section-index">02 / TYPE</span>
+            </div>
+
+            <div class="wu-grid-2">
+              <div class="wu-panel">
+                <div class="wu-spec-label">Heading</div>
+                <div class="wu-stack">
+                  <div class="wu-t-h-32">Keep the hard parts quiet</div>
+                  <div class="wu-t-h-24">One link is enough</div>
+                  <div class="wu-t-h-20">Workspace overview</div>
+                  <div class="wu-t-h-16">Can people join?</div>
+                </div>
+              </div>
+              <div class="wu-panel">
+                <div class="wu-spec-label">Copy</div>
+                <div class="wu-stack">
+                  <p class="wu-t-copy-16">A local service handles disk access, writes project files, and starts or stops tasks. The browser only talks to it over loopback.</p>
+                  <p class="wu-t-copy-14">The same palette recalculates contrast in light and dark mode, so a page does not need a second theme stylesheet.</p>
+                  <p class="wu-t-copy-13 wu-muted">Short labels stay quiet; longer explanations use the copy sizes.</p>
+                  <p class="wu-t-label-12 wu-subtle">LABEL · 12 / 17 · METADATA AND TIMESTAMPS</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="wu-panel" style="margin-top: 14px">
+              <div class="wu-spec-label">Mono</div>
+              <p class="wu-t-mono-13">C:\Users\you\Documents\Atlas</p>
+              <p class="wu-t-mono-12 wu-subtle" style="margin-top: 5px">127.0.0.1:4173 · runtime 2.4.0 · v2.4</p>
+            </div>
+          </section>
+
+          <section class="wu-section" id="scale">
+            <div class="wu-section-head">
+              <div>
+                <h2 class="wu-section-title">Scale &amp; shadow</h2>
+                <p class="wu-section-desc">Spacing follows a 4px rhythm; radii have four steps; shadows describe elevation without becoming decoration.</p>
+              </div>
+              <span class="wu-section-index">03 / SCALE</span>
+            </div>
+
+            <div class="wu-grid-3">
+              <div class="wu-panel">
+                <div class="wu-spec-label">Spacing</div>
+                <div class="wu-space-grid">
+                  <div class="wu-space-item"><span class="wu-space-bar" style="--wu-space:4px"></span><span class="wu-space-label">4</span></div>
+                  <div class="wu-space-item"><span class="wu-space-bar" style="--wu-space:8px"></span><span class="wu-space-label">8</span></div>
+                  <div class="wu-space-item"><span class="wu-space-bar" style="--wu-space:12px"></span><span class="wu-space-label">12</span></div>
+                  <div class="wu-space-item"><span class="wu-space-bar" style="--wu-space:16px"></span><span class="wu-space-label">16</span></div>
+                  <div class="wu-space-item"><span class="wu-space-bar" style="--wu-space:24px"></span><span class="wu-space-label">24</span></div>
+                  <div class="wu-space-item"><span class="wu-space-bar" style="--wu-space:32px"></span><span class="wu-space-label">32</span></div>
+                </div>
+              </div>
+              <div class="wu-panel">
+                <div class="wu-spec-label">Radius</div>
+                <div class="wu-row">
+                  <span style="width:40px;height:40px;border-radius:6px;background:var(--ds-brand-100);box-shadow:inset 0 0 0 1px var(--ds-brand-300)"></span>
+                  <span style="width:40px;height:40px;border-radius:8px;background:var(--ds-brand-100);box-shadow:inset 0 0 0 1px var(--ds-brand-300)"></span>
+                  <span style="width:40px;height:40px;border-radius:12px;background:var(--ds-brand-100);box-shadow:inset 0 0 0 1px var(--ds-brand-300)"></span>
+                  <span style="width:40px;height:40px;border-radius:16px;background:var(--ds-brand-100);box-shadow:inset 0 0 0 1px var(--ds-brand-300)"></span>
+                  <span style="width:54px;height:28px;border-radius:999px;background:var(--ds-brand-100);box-shadow:inset 0 0 0 1px var(--ds-brand-300)"></span>
+                </div>
+                <p class="wu-hint" style="margin-top: 9px">Buttons 8 · Cards 12 · Overlays 16 · Pills 999</p>
+              </div>
+              <div class="wu-panel">
+                <div class="wu-spec-label">Shadow</div>
+                <div class="wu-stack">
+                  <div style="padding:10px 12px;border-radius:10px;background:var(--ds-background-100);box-shadow:var(--wu-shadow-border)">border</div>
+                  <div style="padding:10px 12px;border-radius:10px;background:var(--ds-background-100);box-shadow:var(--wu-shadow-md)">menu</div>
+                  <div style="padding:10px 12px;border-radius:10px;background:var(--ds-background-100);box-shadow:var(--wu-shadow-modal)">modal</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="wu-panel" style="margin-top: 14px">
+              <div class="wu-spec-label">Focus ring</div>
+              <div class="wu-row">
+                <button class="wu-btn wu-btn--secondary" style="box-shadow:var(--wu-focus)">Keyboard focus</button>
+                <input class="wu-input" style="max-width:260px;box-shadow:var(--wu-focus)" value="Focused input" aria-label="Focus example" />
+                <span class="wu-hint">A 2px ring plus a 4px tea glow replaces the browser default.</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="wu-section" id="motion">
+            <div class="wu-section-head">
+              <div>
+                <h2 class="wu-section-title">Motion</h2>
+                <p class="wu-section-desc">Non-linear motion with a policy: instant response, trigger-anchored space, interruptible springs, and a gentler path when motion is reduced.</p>
+              </div>
+              <span class="wu-section-index">04 / MOTION</span>
+            </div>
+
+            <div class="wu-grid-2">
+              <div class="wu-panel">
+                <div class="wu-spec-label">Press &amp; rebound</div>
+                <p class="wu-hint">Scale starts on press, not release. The return uses the strong ease-out curve.</p>
+                <div class="wu-row" style="margin-top: 12px">
+                  <button class="wu-btn wu-btn--accent" type="button">Press and hold</button>
+                  <button class="wu-btn wu-btn--secondary" type="button">Secondary</button>
+                </div>
+                <div class="wu-row" style="margin-top: 14px">
+                  <label class="wu-check"><input type="checkbox" checked /><span class="wu-check-box"><svg class="wu-icon"><use href="#i-check-box"/></svg></span>Reveal check</label>
+                  <span class="wu-hint" style="margin-left: 4px">Switch</span>
+                  <button class="wu-switch" type="button" role="switch" aria-checked="true" aria-label="Motion switch"></button>
+                </div>
+              </div>
+
+              <div class="wu-panel">
+                <div class="wu-spec-label">Refocus on change</div>
+                <p class="wu-hint">New data arrives blurred, then resolves. No hard cut and no crossfade ghosting.</p>
+                <div class="wu-motion-readout">
+                  <span class="wu-t-label-12 wu-subtle">Active members</span>
+                  <div class="wu-motion-value" id="motion-refocus-value" data-i18n-ignore data-motion-refocus-watch aria-live="polite">1,284</div>
+                </div>
+                <button class="wu-btn wu-btn--secondary wu-btn--sm" type="button" data-motion-refocus="#motion-refocus-value" style="margin-top: 10px">Update value</button>
+              </div>
+
+              <div class="wu-panel">
+                <div class="wu-spec-label">Number ticker</div>
+                <p class="wu-hint">The value is a spring, not a tween; digits use tabular figures.</p>
+                <div class="wu-motion-readout">
+                  <span class="wu-t-label-12 wu-subtle">Queue depth</span>
+                  <div class="wu-motion-value wu-motion-number" data-motion-ticker data-value="64" data-i18n-ignore>64</div>
+                </div>
+                <div class="wu-row" style="margin-top: 10px">
+                  <button class="wu-btn wu-btn--secondary wu-btn--xs" type="button" data-motion-ticker-step="10">+10</button>
+                  <button class="wu-btn wu-btn--secondary wu-btn--xs" type="button" data-motion-ticker-step="-10">−10</button>
+                  <button class="wu-btn wu-btn--secondary wu-btn--xs" type="button" data-motion-ticker-random>Random</button>
+                </div>
+              </div>
+
+              <div class="wu-panel">
+                <div class="wu-spec-label">Stagger reveal</div>
+                <p class="wu-hint">30–80ms apart. Decorative, never input-blocking.</p>
+                <div class="wu-motion-stagger" id="motion-stagger" data-motion-reveal data-motion-stagger>
+                  <span class="wu-motion-chip" data-motion-item>01</span>
+                  <span class="wu-motion-chip" data-motion-item>02</span>
+                  <span class="wu-motion-chip" data-motion-item>03</span>
+                  <span class="wu-motion-chip" data-motion-item>04</span>
+                  <span class="wu-motion-chip" data-motion-item>05</span>
+                  <span class="wu-motion-chip" data-motion-item>06</span>
+                  <span class="wu-motion-chip" data-motion-item>07</span>
+                  <span class="wu-motion-chip" data-motion-item>08</span>
+                </div>
+                <button class="wu-btn wu-btn--secondary wu-btn--xs" type="button" data-motion-replay="#motion-stagger" style="margin-top: 10px">Replay</button>
+              </div>
+            </div>
+
+            <div class="wu-spec">
+              <div class="wu-spec-label">Pop from trigger <span class="wu-spec-note">Spatial consistency; no overshoot on a surface that just appeared</span></div>
+              <div class="wu-panel">
+                <div class="wu-row">
+                  <div class="wu-menu-wrap" data-menu>
+                    <button class="wu-btn wu-btn--secondary" type="button" data-menu-toggle aria-haspopup="menu" aria-expanded="false">
+                      <svg class="wu-icon"><use href="#i-motion"/></svg>Open popover
+                      <svg class="wu-icon" style="width:13px;height:13px"><use href="#i-chevron"/></svg>
+                    </button>
+                    <div class="wu-menu" role="menu" hidden>
+                      <div class="wu-menu-label">Motion</div>
+                      <button class="wu-menu-item" type="button" role="menuitem"><svg class="wu-icon"><use href="#i-play"/></svg>Replay entrance</button>
+                      <button class="wu-menu-item" type="button" role="menuitem"><svg class="wu-icon"><use href="#i-motion"/></svg>Spring profile</button>
+                      <button class="wu-menu-item" type="button" role="menuitem"><svg class="wu-icon"><use href="#i-refresh"/></svg>Reset demo</button>
+                    </div>
+                  </div>
+                  <span class="wu-hint">Menus scale from the trigger with transform-origin, then leave the same way.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="wu-spec">
+              <div class="wu-spec-label">Typing &amp; selection <span class="wu-spec-note">Caret glides; selection grows from its anchor.</span></div>
+              <div class="wu-panel">
+                <div class="wu-field">
+                  <label class="wu-label" for="caret-demo">Draft</label>
+                  <div class="wu-caret-field" data-caret-field>
+                    <span class="wu-caret-selection-layer" aria-hidden="true">
+                      <span class="wu-caret-selection" data-caret-selection></span>
+                    </span>
+                    <input class="wu-input wu-caret-input" id="caret-demo" data-caret-input value="Motion should feel continuous." autocomplete="off" spellcheck="false" aria-describedby="caret-demo-hint" />
+                    <span class="wu-caret-layer" aria-hidden="true">
+                      <span class="wu-caret" data-caret></span>
+                    </span>
+                  </div>
+                  <p class="wu-hint" id="caret-demo-hint">Type, delete, or drag-select. The caret and highlight settle instead of jumping.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="wu-spec">
+              <div class="wu-spec-label">Gestures <span class="wu-spec-note">1:1 tracking, velocity handoff, momentum projection, rubber-banding</span></div>
+              <div class="wu-grid-2">
+                <div class="wu-panel">
+                  <div class="wu-spec-label">Bottom sheet</div>
+                  <p class="wu-hint">Drag the handle down. A flick dismisses; a small pull springs back.</p>
+                  <div class="wu-sheet-stage" data-sheet-demo data-open>
+                    <div class="wu-sheet-bg" aria-hidden="true">
+                      <div class="wu-sheet-bg-kicker">Workspace</div>
+                      <div class="wu-sheet-bg-title">Runtime settings</div>
+                      <span class="wu-sheet-bg-line" style="width: 68%"></span>
+                      <span class="wu-sheet-bg-line" style="width: 46%"></span>
+                      <span class="wu-sheet-bg-line" style="width: 57%"></span>
+                    </div>
+                    <div class="wu-sheet-scrim" data-sheet-scrim></div>
+                    <div class="wu-sheet" data-sheet>
+                      <button class="wu-sheet-handle" type="button" data-sheet-handle aria-label="Drag to dismiss"><span></span></button>
+                      <div class="wu-sheet-body">
+                        <div class="wu-spec-label">Updates</div>
+                        <h3 class="wu-sheet-title">Two files changed</h3>
+                        <p class="wu-hint">Pull the handle down. A small drag settles back; a flick carries through.</p>
+                        <div class="wu-row">
+                          <button class="wu-btn wu-btn--secondary wu-btn--sm" type="button" data-sheet-close>Close</button>
+                        </div>
+                      </div>
+                    </div>
+                    <button class="wu-btn wu-btn--secondary wu-btn--sm wu-sheet-open" type="button" data-sheet-open hidden>Open sheet</button>
+                  </div>
+                </div>
+
+                <div class="wu-panel">
+                  <div class="wu-spec-label">Swipe card</div>
+                  <p class="wu-hint">Drag left or right. Release past the threshold, or flick, to dismiss.</p>
+                  <div class="wu-swipe-stage" data-swipe-demo>
+                    <div class="wu-swipe-behind wu-swipe-behind--left" data-swipe-keep aria-hidden="true">Keep</div>
+                    <div class="wu-swipe-behind wu-swipe-behind--right" data-swipe-archive aria-hidden="true">Archive</div>
+                    <div class="wu-swipe-card-wrap">
+                      <div class="wu-swipe-card" data-swipe-card role="group" tabindex="0" aria-label="Weekly digest card. Use the left or right arrow key to dismiss it.">
+                        <div class="wu-swipe-card-kicker">Inbox</div>
+                        <div class="wu-swipe-card-title">Weekly digest</div>
+                        <p class="wu-swipe-card-desc">Three changes landed in the runtime. Review them before the next sync.</p>
+                        <div class="wu-swipe-card-meta">2 min read · 10:24</div>
+                      </div>
+                    </div>
+                    <button class="wu-btn wu-btn--secondary wu-btn--sm wu-swipe-reset" type="button" data-swipe-reset hidden>Bring it back</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="wu-spec">
+              <div class="wu-spec-label">Profiles <span class="wu-spec-note">One profile per interaction. The dock multiplies time and distance.</span></div>
+              <div class="wu-panel">
+                <div class="wu-motion-profile-grid">
+                  <div class="wu-motion-profile">
+                    <div class="wu-motion-profile-name"><span>Press</span><code>140ms</code></div>
+                    <p>Strong ease-out. Scale 0.97 starts on pointer-down.</p>
+                  </div>
+                  <div class="wu-motion-profile">
+                    <div class="wu-motion-profile-name"><span>Menu</span><code>200 / 150ms</code></div>
+                    <p>Scale 0.95 from the trigger; exit the same path, slightly smaller.</p>
+                  </div>
+                  <div class="wu-motion-profile">
+                    <div class="wu-motion-profile-name"><span>Refocus</span><code>260ms</code></div>
+                    <p>Blur 3px → 0, rise 2px, scale 0.985.</p>
+                  </div>
+                  <div class="wu-motion-profile">
+                    <div class="wu-motion-profile-name"><span>Stagger</span><code>320 / 45ms</code></div>
+                    <p>Item duration and step. Opacity plus an 8px rise.</p>
+                  </div>
+                  <div class="wu-motion-profile">
+                    <div class="wu-motion-profile-name"><span>Spring</span><code>0.4s · 1.0</code></div>
+                    <p>Apple response and damping. Critically damped by default; bounce is earned by momentum.</p>
+                  </div>
+                  <div class="wu-motion-profile">
+                    <div class="wu-motion-profile-name"><span>Gesture</span><code>40% / 90px</code></div>
+                    <p>Sheet and card thresholds; spring response 0.4; rubber-band 0.55.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="wu-spec">
+              <div class="wu-spec-label">Policy <span class="wu-spec-note">The dock at the bottom left tunes all of this live.</span></div>
+              <div class="wu-grid-2">
+                <div class="wu-callout wu-callout--success">
+                  <svg class="wu-icon"><use href="#i-check-circle"/></svg>
+                  <div class="wu-callout-body">
+                    <div class="wu-callout-title">Animate</div>
+                    <p class="wu-callout-desc">Feedback, legible state changes, spatial continuity, and content that would otherwise teleport.</p>
+                  </div>
+                </div>
+                <div class="wu-callout wu-callout--danger">
+                  <svg class="wu-icon"><use href="#i-alert"/></svg>
+                  <div class="wu-callout-body">
+                    <div class="wu-callout-title">Do not animate</div>
+                    <p class="wu-callout-desc">Keyboard repeats, high-frequency navigation, and decoration on data the reader is trying to read.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="wu-section" id="buttons">
+            <div class="wu-section-head">
+              <div>
+                <h2 class="wu-section-title">Buttons</h2>
+                <p class="wu-section-desc">Default and accent buttons carry primary actions. Keep one emphasized action per screen, and reserve error for destructive work.</p>
+              </div>
+              <span class="wu-section-index">05 / BUTTON</span>
+            </div>
+
+            <div class="wu-spec">
+              <div class="wu-spec-label">Variants</div>
+              <div class="wu-panel">
+                <div class="wu-row">
+                  <button class="wu-btn wu-btn--default">Start sync</button>
+                  <button class="wu-btn wu-btn--secondary">Open folder</button>
+                  <button class="wu-btn wu-btn--accent">Publish update</button>
+                  <button class="wu-btn wu-btn--tertiary">Later</button>
+                  <button class="wu-btn wu-btn--ghost">Cancel</button>
+                  <button class="wu-btn wu-btn--error">Delete project</button>
+                  <button class="wu-btn wu-btn--warning">Pause sync</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="wu-spec">
+              <div class="wu-spec-label">Sizes and states</div>
+              <div class="wu-panel">
+                <div class="wu-row">
+                  <button class="wu-btn wu-btn--secondary wu-btn--xs">xs</button>
+                  <button class="wu-btn wu-btn--secondary wu-btn--sm">sm</button>
+                  <button class="wu-btn wu-btn--secondary">md</button>
+                  <button class="wu-btn wu-btn--secondary wu-btn--lg">lg</button>
+                  <button class="wu-btn wu-btn--default" disabled>Unavailable</button>
+                  <button class="wu-btn wu-btn--accent"><span class="wu-spinner"></span>Preparing</button>
+                  <button class="wu-btn wu-btn--secondary wu-btn--square" aria-label="Refresh"><svg class="wu-icon"><use href="#i-refresh"/></svg></button>
+                  <button class="wu-btn wu-btn--tertiary wu-btn--square" aria-label="More"><svg class="wu-icon"><use href="#i-more"/></svg></button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="wu-section" id="forms">
+            <div class="wu-section-head">
+              <div>
+                <h2 class="wu-section-title">Forms</h2>
+                <p class="wu-section-desc">Inputs, selects, switches, checkboxes, and ranges share one height, radius, and focus ring. Labels sit above the control and hints sit below it.</p>
+              </div>
+              <span class="wu-section-index">06 / FORM</span>
+            </div>
+
+            <div class="wu-grid-2">
+              <div class="wu-field">
+                <label class="wu-label" for="demo-name">Project name</label>
+                <input class="wu-input" id="demo-name" value="Atlas" />
+                <p class="wu-hint">Shown on share links and overview cards.</p>
+              </div>
+              <div class="wu-field">
+                <span class="wu-label" id="demo-version-label">Runtime version</span>
+                <div class="wu-select-wrap wu-menu-wrap wu-select-menu-wrap" data-menu data-menu-kind="listbox" data-menu-width="trigger" data-select>
+                  <button class="wu-select wu-select--button" type="button" id="demo-version" role="combobox" data-menu-toggle aria-haspopup="listbox" aria-expanded="false" aria-labelledby="demo-version-label demo-version-value" aria-describedby="demo-version-hint">
+                    <span id="demo-version-value" data-select-value>v2.4</span>
+                  </button>
+                  <div class="wu-menu wu-menu--select" role="listbox" aria-labelledby="demo-version-label" hidden>
+                    <button class="wu-menu-item wu-select-option" type="button" role="option" data-value="v2.4" data-label="v2.4" aria-selected="true">
+                      <span>v2.4</span>
+                      <svg class="wu-icon wu-menu-check" aria-hidden="true"><use href="#i-check"/></svg>
+                    </button>
+                    <button class="wu-menu-item wu-select-option" type="button" role="option" data-value="v2.3" data-label="v2.3" aria-selected="false">
+                      <span>v2.3</span>
+                      <svg class="wu-icon wu-menu-check" aria-hidden="true"><use href="#i-check"/></svg>
+                    </button>
+                    <button class="wu-menu-item wu-select-option" type="button" role="option" data-value="v2.2" data-label="v2.2" aria-selected="false">
+                      <span>v2.2</span>
+                      <svg class="wu-icon wu-menu-check" aria-hidden="true"><use href="#i-check"/></svg>
+                    </button>
+                  </div>
+                  <input type="hidden" name="runtime-version" value="v2.4" data-select-input />
+                </div>
+                <p class="wu-hint" id="demo-version-hint">A version mismatch stops files from matching.</p>
+              </div>
+              <div class="wu-field">
+                <label class="wu-label" for="demo-search">Search files</label>
+                <div class="wu-input-wrap">
+                  <svg class="wu-icon"><use href="#i-search"/></svg>
+                  <input class="wu-input" id="demo-search" placeholder="Search installed files…" />
+                </div>
+              </div>
+              <div class="wu-field">
+                <label class="wu-label" for="demo-path">Project folder</label>
+                <div class="wu-row" style="flex-wrap:nowrap">
+                  <input class="wu-input wu-input--mono" id="demo-path" value="C:\Users\you\Documents\Atlas" />
+                  <button class="wu-btn wu-btn--secondary" type="button"><svg class="wu-icon"><use href="#i-folder"/></svg>Choose</button>
+                </div>
+                <p class="wu-hint">The browser opens the folder picker inside the page.</p>
+              </div>
+              <div class="wu-field">
+                <label class="wu-label" for="demo-error">Concurrency</label>
+                <input class="wu-input wu-input--error" id="demo-error" value="99999" />
+                <p class="wu-error-text">Concurrency must be between 1 and 64.</p>
+              </div>
+              <div class="wu-field">
+                <label class="wu-label" for="demo-mono">Service address</label>
+                <input class="wu-input wu-input--mono" id="demo-mono" value="127.0.0.1:4173" />
+                <p class="wu-hint">Listens on the loopback interface only.</p>
+              </div>
+              <div class="wu-field" style="grid-column: 1 / -1">
+                <label class="wu-label" for="demo-note">Notes</label>
+                <textarea class="wu-textarea" id="demo-note" placeholder="A short note only you will understand…"></textarea>
+              </div>
+            </div>
+
+            <div class="wu-panel" style="margin-top: 14px">
+              <div class="wu-grid-3">
+                <div>
+                  <div class="wu-spec-label">Switch</div>
+                  <div class="wu-switch-row">
+                    <div><span class="wu-label">Launch at login</span><p class="wu-hint">Runs in the background after sign-in</p></div>
+                    <button class="wu-switch" type="button" role="switch" aria-checked="true" aria-label="Launch at login"></button>
+                  </div>
+                  <div class="wu-switch-row">
+                    <div><span class="wu-label">Check for updates</span><p class="wu-hint">Prompts when a new build is available</p></div>
+                    <button class="wu-switch" type="button" role="switch" aria-checked="false" aria-label="Check for updates"></button>
+                  </div>
+                  <div class="wu-switch-row" style="opacity:.55">
+                    <div><span class="wu-label">Experimental features</span><p class="wu-hint">Unavailable for now</p></div>
+                    <button class="wu-switch" type="button" role="switch" aria-checked="false" disabled aria-label="Experimental features"></button>
+                  </div>
+                  <p class="wu-hint" style="margin-top: 8px">The checked thumb reads the brand ink token. A light track in dark mode gets a dark thumb; a dark track in light mode gets a light thumb.</p>
+                </div>
+                <div>
+                  <div class="wu-spec-label">Checkbox</div>
+                  <div class="wu-stack">
+                    <label class="wu-check"><input type="checkbox" checked /><span class="wu-check-box"><svg class="wu-icon"><use href="#i-check-box"/></svg></span>Run preflight checks</label>
+                    <label class="wu-check"><input type="checkbox" /><span class="wu-check-box"><svg class="wu-icon"><use href="#i-check-box"/></svg></span>Create a snapshot</label>
+                    <label class="wu-check" style="opacity:.55"><input type="checkbox" disabled /><span class="wu-check-box"><svg class="wu-icon"><use href="#i-check-box"/></svg></span>Desktop only</label>
+                  </div>
+                </div>
+                <div>
+                  <div class="wu-spec-label">Range</div>
+                  <input class="wu-range" type="range" min="2" max="16" value="8" style="--wu-range:42%" aria-label="Memory limit" />
+                  <div class="wu-row" style="justify-content:space-between"><span class="wu-hint">Memory limit</span><span class="wu-t-mono-12">8 GB</span></div>
+                  <div class="wu-spec-label" style="margin-top:18px">Segmented control</div>
+                  <div class="wu-segmented" data-segmented role="group" aria-label="Project type">
+                    <button type="button" aria-pressed="true">Standard</button>
+                    <button type="button" aria-pressed="false">Full</button>
+                    <button type="button" aria-pressed="false">Custom</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="wu-section" id="badges">
+            <div class="wu-section-head">
+              <div>
+                <h2 class="wu-section-title">Badges &amp; status</h2>
+                <p class="wu-section-desc">Badges use low-saturation fills for status. Solid badges are reserved for the current filter or a strong callout.</p>
+              </div>
+              <span class="wu-section-index">07 / BADGE</span>
+            </div>
+
+            <div class="wu-panel">
+              <div class="wu-spec-label">Variants</div>
+              <div class="wu-row">
+                <span class="wu-badge wu-badge--gray">Stopped</span>
+                <span class="wu-badge wu-badge--blue">v2.4 · Standard</span>
+                <span class="wu-badge wu-badge--green">Running</span>
+                <span class="wu-badge wu-badge--amber">Preparing</span>
+                <span class="wu-badge wu-badge--red">Failed</span>
+                <span class="wu-badge wu-badge--violet">Shared</span>
+                <span class="wu-badge wu-badge--teal">Synced</span>
+                <span class="wu-badge wu-badge--solid">Current</span>
+                <span class="wu-badge wu-badge--accent">Recommended</span>
+              </div>
+              <div class="wu-spec-label" style="margin-top: 18px">Sizes</div>
+              <div class="wu-row">
+                <span class="wu-badge wu-badge--gray wu-badge--sm">sm</span>
+                <span class="wu-badge wu-badge--gray">md</span>
+                <span class="wu-badge wu-badge--gray wu-badge--lg">lg</span>
+              </div>
+              <div class="wu-row" style="margin-top: 14px">
+                <span class="wu-live"><span class="wu-status-dot"></span>Connected</span>
+                <span class="wu-warn"><span class="wu-status-dot"></span>Checking</span>
+                <span class="wu-danger"><span class="wu-status-dot"></span>Offline</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="wu-section" id="cards">
+            <div class="wu-section-head">
+              <div>
+                <h2 class="wu-section-title">Cards &amp; callouts</h2>
+                <p class="wu-section-desc">A card holds one group of related information. A callout gives a heading, an explanation, and a next step.</p>
+              </div>
+              <span class="wu-section-index">08 / CARD</span>
+            </div>
+
+            <div class="wu-grid-3">
+              <div class="wu-card">
+                <div class="wu-card-head">
+                  <div>
+                    <h3 class="wu-card-title">Versions &amp; snapshots</h3>
+                    <p class="wu-card-desc">Exports and point-in-time snapshots stay separate, so neither entry point is ambiguous.</p>
+                  </div>
+                  <span class="wu-badge wu-badge--gray wu-badge--sm">Local</span>
+                </div>
+                <div class="wu-card-body wu-row">
+                  <button class="wu-btn wu-btn--default wu-btn--sm">Create snapshot</button>
+                  <button class="wu-btn wu-btn--secondary wu-btn--sm">Open folder</button>
+                </div>
+              </div>
+              <div class="wu-card wu-card--wash">
+                <div class="wu-card-head">
+                  <div><h3 class="wu-card-title">Can people join?</h3><p class="wu-card-desc">Run a check first, then share the address that works.</p></div>
+                  <span class="wu-badge wu-badge--green wu-badge--sm"><span class="wu-status-dot"></span>Direct</span>
+                </div>
+                <p class="wu-t-mono-12 wu-muted" style="margin-top:16px">192.168.1.12:8080</p>
+                <div class="wu-card-body wu-row"><button class="wu-btn wu-btn--secondary wu-btn--sm">Copy address</button><button class="wu-btn wu-btn--ghost wu-btn--sm">Check again</button></div>
+              </div>
+              <div class="wu-card wu-card--flat">
+                <div class="wu-card-head"><div><h3 class="wu-card-title">Run status</h3><p class="wu-card-desc">Live metrics appear once the task starts.</p></div></div>
+                <div class="wu-stat-value" style="margin-top:18px">—</div>
+                <p class="wu-stat-foot">Waiting to start</p>
+              </div>
+            </div>
+
+            <div class="wu-spec">
+              <div class="wu-spec-label">Callouts</div>
+              <div class="wu-grid-2">
+                <div class="wu-callout wu-callout--info">
+                  <svg class="wu-icon"><use href="#i-info"/></svg>
+                  <div class="wu-callout-body">
+                    <div class="wu-callout-title">The browser needs a local service</div>
+                    <p class="wu-callout-desc">Install it once; the page reconnects automatically. The service listens on loopback only.</p>
+                    <div class="wu-callout-action"><button class="wu-btn wu-btn--accent wu-btn--xs">Download service</button><button class="wu-btn wu-btn--tertiary wu-btn--xs">Later</button></div>
+                  </div>
+                </div>
+                <div class="wu-callout wu-callout--warning">
+                  <svg class="wu-icon"><use href="#i-alert"/></svg>
+                  <div class="wu-callout-body">
+                    <div class="wu-callout-title">Terms not confirmed</div>
+                    <p class="wu-callout-desc">Confirm once and the task can start.</p>
+                    <div class="wu-callout-action"><button class="wu-btn wu-btn--warning wu-btn--xs">Review and confirm</button></div>
+                  </div>
+                </div>
+                <div class="wu-callout wu-callout--danger">
+                  <svg class="wu-icon"><use href="#i-alert"/></svg>
+                  <div class="wu-callout-body">
+                    <div class="wu-callout-title">Sync channel busy</div>
+                    <p class="wu-callout-desc">8080 is used by another process. Pick a different channel and try again.</p>
+                  </div>
+                </div>
+                <div class="wu-callout wu-callout--success">
+                  <svg class="wu-icon"><use href="#i-check-circle"/></svg>
+                  <div class="wu-callout-body">
+                    <div class="wu-callout-title">All checks passed</div>
+                    <p class="wu-callout-desc">Runtime, memory, channel, and project folder look good.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="wu-spec">
+              <div class="wu-spec-label">Empty state</div>
+              <div class="wu-card">
+                <div class="wu-empty">
+                  <div class="wu-empty-mark"><svg class="wu-icon"><use href="#i-server"/></svg></div>
+                  <div>
+                    <div class="wu-empty-title">Nothing here yet</div>
+                    <p class="wu-empty-desc">Create or import a project. Each one keeps its own configuration and data.</p>
+                  </div>
+                  <button class="wu-btn wu-btn--accent"><svg class="wu-icon"><use href="#i-plus"/></svg>New project</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="wu-section" id="navigation">
+            <div class="wu-section-head">
+              <div>
+                <h2 class="wu-section-title">Navigation</h2>
+                <p class="wu-section-desc">Tabs switch between peers, segmented controls switch modes, and breadcrumbs show hierarchy without carrying primary actions.</p>
+              </div>
+              <span class="wu-section-index">09 / NAV</span>
+            </div>
+
+            <div class="wu-panel">
+              <div class="wu-breadcrumb">
+                <a href="#overview">Projects</a><span class="wu-sep">/</span><a href="#navigation">Atlas</a><span class="wu-sep">/</span><span>Content</span>
+              </div>
+              <div class="wu-tabs" data-tabs role="tablist" aria-label="Project views" style="margin-top:16px">
+                <button class="wu-tab" type="button" role="tab" data-tab="installed" aria-selected="true">Installed</button>
+                <button class="wu-tab" type="button" role="tab" data-tab="library" aria-selected="false">Library</button>
+                <button class="wu-tab" type="button" role="tab" data-tab="updates" aria-selected="false">Updates</button>
+              </div>
+              <div class="wu-tabpanel" data-panel="installed">25 files installed. Restart the project after installing; disabling never deletes a file.</div>
+              <div class="wu-tabpanel" data-panel="library" hidden>Search the library and install into this project.</div>
+              <div class="wu-tabpanel" data-panel="updates" hidden>3 files can update. Create a snapshot first.</div>
+            </div>
+
+            <div class="wu-grid-2" style="margin-top:14px">
+              <div class="wu-panel">
+                <div class="wu-spec-label">Dropdown menu</div>
+                <div class="wu-menu-wrap" data-menu>
+                  <button class="wu-btn wu-btn--secondary" type="button" data-menu-toggle aria-haspopup="menu" aria-expanded="false">
+                    <svg class="wu-icon"><use href="#i-server"/></svg>Project actions
+                    <svg class="wu-icon" style="width:13px;height:13px"><use href="#i-chevron"/></svg>
+                  </button>
+                  <div class="wu-menu" role="menu" hidden>
+                    <div class="wu-menu-label">Atlas</div>
+                    <button class="wu-menu-item" type="button" role="menuitem" aria-keyshortcuts="Control+S"><svg class="wu-icon"><use href="#i-play"/></svg>Start sync<span class="wu-menu-shortcut" aria-hidden="true">Ctrl S</span></button>
+                    <button class="wu-menu-item" type="button" role="menuitem" aria-keyshortcuts="Control+L"><svg class="wu-icon"><use href="#i-terminal"/></svg>View logs<span class="wu-menu-shortcut" aria-hidden="true">Ctrl L</span></button>
+                    <button class="wu-menu-item" type="button" role="menuitem"><svg class="wu-icon"><use href="#i-folder"/></svg>Open folder</button>
+                    <button class="wu-menu-item" type="button" role="menuitem" disabled><svg class="wu-icon"><use href="#i-package"/></svg>Archive project</button>
+                    <div class="wu-menu-sep"></div>
+                    <button class="wu-menu-item wu-menu-item--danger" type="button" role="menuitem"><svg class="wu-icon"><use href="#i-trash"/></svg>Remove from list</button>
+                  </div>
+                </div>
+              </div>
+              <div class="wu-panel">
+                <div class="wu-spec-label">Segmented control</div>
+                <div class="wu-segmented wu-segmented--grow" data-segmented role="group" aria-label="Mode">
+                  <button type="button" aria-pressed="true">Create</button>
+                  <button type="button" aria-pressed="false">Join</button>
+                </div>
+                <p class="wu-hint" style="margin-top:8px">Changes the home screen only; the data stays shared.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="wu-section" id="feedback">
+            <div class="wu-section-head">
+              <div>
+                <h2 class="wu-section-title">Feedback</h2>
+                <p class="wu-section-desc">Progress, skeletons, toasts, and tooltips share one hierarchy. Feedback says what happened and what the reader can do next.</p>
+              </div>
+              <span class="wu-section-index">10 / FEEDBACK</span>
+            </div>
+
+            <div class="wu-grid-2">
+              <div class="wu-panel">
+                <div class="wu-spec-label">Toast</div>
+                <div class="wu-toast">
+                  <svg class="wu-icon"><use href="#i-check-circle"/></svg>
+                  <div><div class="wu-toast-title">Export ready</div><div class="wu-toast-desc">6 files · share directly, members can import.</div></div>
+                  <button class="wu-toast-action" type="button">View</button>
+                </div>
+                <div class="wu-toast" id="demo-toast" style="margin-top:10px" hidden>
+                  <svg class="wu-icon"><use href="#i-refresh"/></svg>
+                  <div><div class="wu-toast-title">A new build is available</div><div class="wu-toast-desc">Refresh to use the latest version.</div></div>
+                  <button class="wu-toast-action" type="button">Refresh</button>
+                </div>
+                <button class="wu-btn wu-btn--secondary wu-btn--sm" type="button" data-toast-show style="margin-top:10px">Show a toast</button>
+              </div>
+              <div class="wu-panel">
+                <div class="wu-spec-label">Progress &amp; skeleton</div>
+                <div class="wu-row" style="justify-content:space-between"><span class="wu-hint">Downloading assets</span><span class="wu-t-mono-12">64%</span></div>
+                <div class="wu-progress" style="margin-top:8px"><span style="--wu-progress:64%"></span></div>
+                <div class="wu-stack" style="margin-top:16px">
+                  <div class="wu-skeleton" style="width:78%"></div>
+                  <div class="wu-skeleton" style="width:52%"></div>
+                  <div class="wu-skeleton" style="width:64%"></div>
+                </div>
+                <div class="wu-row" style="margin-top:14px"><span class="wu-spinner" style="color:var(--ds-brand-600)"></span><span class="wu-hint">Checking runtime…</span></div>
+              </div>
+            </div>
+
+            <div class="wu-panel" style="margin-top:14px">
+              <div class="wu-spec-label">Tooltip</div>
+              <div class="wu-row">
+                <span class="wu-tip" data-tip="Listens on the loopback interface only"><button class="wu-btn wu-btn--tertiary wu-btn--square" aria-label="Network details"><svg class="wu-icon"><use href="#i-info"/></svg></button></span>
+                <span class="wu-hint">Appears on hover or keyboard focus. It adds context and never holds the only copy of a message.</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="wu-section" id="data">
+            <div class="wu-section-head">
+              <div>
+                <h2 class="wu-section-title">Data</h2>
+                <p class="wu-section-desc">Tables compare values, key-value rows describe one object, and code blocks carry paths, commands, and addresses.</p>
+              </div>
+              <span class="wu-section-index">11 / DATA</span>
+            </div>
+
+            <div class="wu-table-wrap">
+              <table class="wu-table">
+                <thead><tr><th>Name</th><th>Version</th><th>Scope</th><th>Sync</th><th>Size</th><th class="wu-table-actions">Actions</th></tr></thead>
+                <tbody>
+                  <tr data-row-context tabindex="0">
+                    <td>Atlas Core</td><td class="wu-mono">2.4.1</td><td><span class="wu-badge wu-badge--violet wu-badge--sm">Shared</span></td><td><span class="wu-badge wu-badge--green wu-badge--sm">Auto-sync</span></td><td>2.4 MB</td>
+                    <td class="wu-table-actions">
+                      <div class="wu-menu-wrap" data-menu>
+                        <button class="wu-btn wu-btn--tertiary wu-btn--square wu-btn--xs" type="button" data-menu-toggle aria-haspopup="menu" aria-expanded="false" aria-label="Atlas Core actions"><svg class="wu-icon"><use href="#i-more"/></svg></button>
+                        <div class="wu-menu" role="menu" hidden>
+                          <div class="wu-menu-label">Atlas Core</div>
+                          <button class="wu-menu-item" type="button" role="menuitem"><svg class="wu-icon"><use href="#i-folder"/></svg>Open folder</button>
+                          <button class="wu-menu-item" type="button" role="menuitem"><svg class="wu-icon"><use href="#i-copy"/></svg>Duplicate package</button>
+                          <button class="wu-menu-item" type="button" role="menuitem"><svg class="wu-icon"><use href="#i-refresh"/></svg>Check for updates</button>
+                          <div class="wu-menu-sep"></div>
+                          <button class="wu-menu-item wu-menu-item--danger" type="button" role="menuitem"><svg class="wu-icon"><use href="#i-trash"/></svg>Remove from project</button>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr data-row-context tabindex="0">
+                    <td>UI Kit</td><td class="wu-mono">1.8.0</td><td><span class="wu-badge wu-badge--violet wu-badge--sm">Shared</span></td><td><span class="wu-badge wu-badge--green wu-badge--sm">Auto-sync</span></td><td>1.1 MB</td>
+                    <td class="wu-table-actions">
+                      <div class="wu-menu-wrap" data-menu>
+                        <button class="wu-btn wu-btn--tertiary wu-btn--square wu-btn--xs" type="button" data-menu-toggle aria-haspopup="menu" aria-expanded="false" aria-label="UI Kit actions"><svg class="wu-icon"><use href="#i-more"/></svg></button>
+                        <div class="wu-menu" role="menu" hidden>
+                          <div class="wu-menu-label">UI Kit</div>
+                          <button class="wu-menu-item" type="button" role="menuitem"><svg class="wu-icon"><use href="#i-folder"/></svg>Open folder</button>
+                          <button class="wu-menu-item" type="button" role="menuitem"><svg class="wu-icon"><use href="#i-copy"/></svg>Duplicate package</button>
+                          <button class="wu-menu-item" type="button" role="menuitem"><svg class="wu-icon"><use href="#i-refresh"/></svg>Check for updates</button>
+                          <div class="wu-menu-sep"></div>
+                          <button class="wu-menu-item wu-menu-item--danger" type="button" role="menuitem"><svg class="wu-icon"><use href="#i-trash"/></svg>Remove from project</button>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr data-row-context tabindex="0">
+                    <td>Image Pipeline</td><td class="wu-mono">0.9.3</td><td><span class="wu-badge wu-badge--violet wu-badge--sm">Shared</span></td><td><span class="wu-badge wu-badge--gray wu-badge--sm">Pinned</span></td><td>28.8 MB</td>
+                    <td class="wu-table-actions">
+                      <div class="wu-menu-wrap" data-menu>
+                        <button class="wu-btn wu-btn--tertiary wu-btn--square wu-btn--xs" type="button" data-menu-toggle aria-haspopup="menu" aria-expanded="false" aria-label="Image Pipeline actions"><svg class="wu-icon"><use href="#i-more"/></svg></button>
+                        <div class="wu-menu" role="menu" hidden>
+                          <div class="wu-menu-label">Image Pipeline</div>
+                          <button class="wu-menu-item" type="button" role="menuitem"><svg class="wu-icon"><use href="#i-folder"/></svg>Open folder</button>
+                          <button class="wu-menu-item" type="button" role="menuitem"><svg class="wu-icon"><use href="#i-copy"/></svg>Duplicate package</button>
+                          <button class="wu-menu-item" type="button" role="menuitem"><svg class="wu-icon"><use href="#i-refresh"/></svg>Check for updates</button>
+                          <div class="wu-menu-sep"></div>
+                          <button class="wu-menu-item wu-menu-item--danger" type="button" role="menuitem"><svg class="wu-icon"><use href="#i-trash"/></svg>Remove from project</button>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="wu-grid-2" style="margin-top:14px">
+              <div class="wu-panel">
+                <div class="wu-spec-label">Key-value</div>
+                <dl class="wu-kv">
+                  <dt>Version</dt><dd>v2.4 · Standard</dd>
+                  <dt>Concurrency</dt><dd class="wu-mono">12</dd>
+                  <dt>Folder</dt><dd class="wu-mono" style="font-size:11px">D:\Work\Atlas</dd>
+                  <dt>Last run</dt><dd>2 days ago</dd>
+                </dl>
+              </div>
+              <div class="wu-panel">
+                <div class="wu-spec-label">Code</div>
+                <pre class="wu-code"><span class="tok-com"># build command</span>
+pnpm build --mode production \
+  <span class="tok-key">--outDir</span> dist</pre>
+                <div class="wu-row" style="margin-top:12px"><kbd class="wu-kbd">Ctrl</kbd><span class="wu-hint">+</span><kbd class="wu-kbd">K</kbd><span class="wu-hint">Open the command palette</span></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="wu-section" id="overlays">
+            <div class="wu-section-head">
+              <div>
+                <h2 class="wu-section-title">Overlays</h2>
+                <p class="wu-section-desc">Confirmation and editing live in a dialog. The title names the purpose, and the footer keeps one primary action.</p>
+              </div>
+              <span class="wu-section-index">12 / OVERLAY</span>
+            </div>
+
+            <div class="wu-panel wu-row">
+              <button class="wu-btn wu-btn--default" type="button" data-dialog-open="demo">
+                <svg class="wu-icon"><use href="#i-layers"/></svg>Open a dialog
+              </button>
+              <span class="wu-hint">Backdrop click, Escape, and focus return are built in.</span>
+            </div>
+          </section>
+
+          <section class="wu-section" id="patterns">
+            <div class="wu-section-head">
+              <div>
+                <h2 class="wu-section-title">Page patterns</h2>
+                <p class="wu-section-desc">Placed back in a page, the components should still preserve hierarchy, spacing, and one clear primary action.</p>
+              </div>
+              <span class="wu-section-index">13 / PATTERN</span>
+            </div>
+
+            <div class="wu-grid-2">
+              <div class="wu-card">
+                <div class="wu-card-head"><div><h3 class="wu-card-title">Local service</h3><p class="wu-card-desc">The browser uses it to read local files and start tasks.</p></div><span class="wu-badge wu-badge--green wu-badge--sm"><span class="wu-status-dot"></span>Connected</span></div>
+                <div class="wu-card-body">
+                  <div class="wu-switch-row"><div><span class="wu-label">Launch service at login</span><p class="wu-hint">Runs in the background after sign-in</p></div><button class="wu-switch" type="button" role="switch" aria-checked="true" aria-label="Launch service at login"></button></div>
+                  <div class="wu-switch-row"><div><span class="wu-label">Check for updates</span><p class="wu-hint">Prompts when a new build is available</p></div><button class="wu-switch" type="button" role="switch" aria-checked="true" aria-label="Check for updates"></button></div>
+                  <p class="wu-t-mono-12 wu-subtle" style="margin-top:10px">http://127.0.0.1:4173</p>
+                </div>
+              </div>
+              <div class="wu-card">
+                <div class="wu-card-head"><div><h3 class="wu-card-title">Workspace status</h3><p class="wu-card-desc">The conclusion comes first, then the numbers.</p></div><span class="wu-badge wu-badge--gray wu-badge--sm">Idle</span></div>
+                <div class="wu-card-body">
+                  <div class="wu-grid-3">
+                    <div class="wu-stat"><div class="wu-stat-label">Uptime</div><div class="wu-stat-value">—</div></div>
+                    <div class="wu-stat"><div class="wu-stat-label">Active members</div><div class="wu-stat-value">0</div></div>
+                    <div class="wu-stat"><div class="wu-stat-label">Concurrency</div><div class="wu-stat-value">8</div></div>
+                  </div>
+                  <div class="wu-row" style="margin-top:14px"><button class="wu-btn wu-btn--default wu-btn--sm"><svg class="wu-icon"><use href="#i-play"/></svg>Start sync</button><button class="wu-btn wu-btn--secondary wu-btn--sm">View logs</button></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="wu-section" id="rules">
+            <div class="wu-section-head">
+              <div>
+                <h2 class="wu-section-title">Usage rules</h2>
+                <p class="wu-section-desc">These rules matter more than any single component. Read them first when moving the library into another app.</p>
+              </div>
+              <span class="wu-section-index">14 / RULES</span>
+            </div>
+
+            <div class="wu-grid-2">
+              <div class="wu-callout wu-callout--success">
+                <svg class="wu-icon"><use href="#i-check-circle"/></svg>
+                <div class="wu-callout-body">
+                  <div class="wu-callout-title">Prefer</div>
+                  <p class="wu-callout-desc">Keep one primary action per screen, use status colors only for status, give every conclusion a next step, use the brand ink token for the checked switch thumb, and limit text to three levels.</p>
+                </div>
+              </div>
+              <div class="wu-callout wu-callout--danger">
+                <svg class="wu-icon"><use href="#i-alert"/></svg>
+                <div class="wu-callout-body">
+                  <div class="wu-callout-title">Avoid</div>
+                  <p class="wu-callout-desc">Painting a page with brand color, using red for ordinary warnings, placing a white thumb on a white track, crowding a button with secondary copy, and leaving an error without an exit.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="wu-panel" style="margin-top:14px">
+              <div class="wu-spec-label">Using the library</div>
+              <div class="wu-code" style="color:var(--ds-gray-1000);background:var(--ds-background-200)">copy <span class="tok-key">tokens.css</span> + <span class="tok-key">wulon.css</span> + <span class="tok-key">fonts/</span>
+<span class="tok-com">&lt;html class="dark" data-palette="green"&gt;</span>
+<span class="tok-key">&lt;button class="wu-btn wu-btn--accent"&gt;</span>Start sync<span class="tok-key">&lt;/button&gt;</span></div>
+              <p class="wu-hint" style="margin-top:10px">Replace the product name and business components. Keep the palette, type, radii, focus, and status semantics.</p>
+            </div>
+          </section>
+
+          <footer style="margin-top:52px;padding-top:18px;border-top:1px solid var(--ds-gray-300);display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;color:var(--ds-gray-700);font-size:11px;line-height:17px">
+            <span>WulonSpec · A reusable color and component layer for Caddy Wulon apps</span>
+            <span class="wu-mono">1.0 · 2026-11</span>
+          </footer>
+        </div>
+      </main>
+    </div>
+
+    <div class="wu-backdrop" id="demo-dialog" hidden>
+      <div class="wu-dialog" role="dialog" aria-modal="true" aria-labelledby="demo-dialog-title">
+        <div class="wu-dialog-head">
+          <h2 class="wu-dialog-title" id="demo-dialog-title">New project</h2>
+          <p class="wu-dialog-desc">Name the project. The runtime and template can change later.</p>
+          <button class="wu-dialog-close" type="button" data-dialog-close aria-label="Close"><svg class="wu-icon"><use href="#i-x"/></svg></button>
+        </div>
+        <div class="wu-dialog-body">
+          <div class="wu-field">
+            <label class="wu-label" for="dialog-name">Display name</label>
+            <input class="wu-input" id="dialog-name" value="Atlas" />
+            <p class="wu-hint">You can change this in project settings later.</p>
+          </div>
+          <div class="wu-switch-row" style="margin-top:8px">
+            <div><span class="wu-label">Create and run</span><p class="wu-hint">Checks the runtime and channel first</p></div>
+            <button class="wu-switch" type="button" role="switch" aria-checked="true" aria-label="Create and run"></button>
+          </div>
+        </div>
+        <div class="wu-dialog-foot">
+          <button class="wu-btn wu-btn--secondary" type="button" data-dialog-close>Cancel</button>
+          <button class="wu-btn wu-btn--default" type="button" data-dialog-close>Create</button>
+        </div>
+      </div>
+    </div>
+
+    <aside class="wu-motion-dock" data-motion-dock data-collapsed aria-label="Motion settings">
+      <button class="wu-motion-dock-toggle" type="button" data-motion-dock-toggle aria-expanded="false">
+        <span class="wu-motion-dot" aria-hidden="true"></span>
+        <span>Motion</span>
+        <svg class="wu-icon" aria-hidden="true"><use href="#i-chevron"/></svg>
+      </button>
+      <div class="wu-motion-dock-body">
+        <div class="wu-motion-row">
+          <span class="wu-label" id="motionEnabledLabel">Enabled</span>
+          <button class="wu-switch" type="button" role="switch" aria-checked="true" data-motion-enabled aria-labelledby="motionEnabledLabel"></button>
+        </div>
+
+        <div class="wu-motion-control">
+          <div class="wu-motion-control-head">
+            <label for="motionSpeed">Speed</label>
+            <output for="motionSpeed" data-motion-speed-value data-i18n-ignore>1×</output>
+          </div>
+          <input class="wu-range" id="motionSpeed" type="range" min="0.5" max="2" step="0.05" value="1" data-motion-speed />
+        </div>
+
+        <div class="wu-motion-control">
+          <div class="wu-motion-control-head">
+            <label for="motionIntensity">Intensity</label>
+            <output for="motionIntensity" data-motion-intensity-value data-i18n-ignore>100%</output>
+          </div>
+          <input class="wu-range" id="motionIntensity" type="range" min="0" max="1.5" step="0.05" value="1" data-motion-intensity />
+        </div>
+
+        <label class="wu-check"><input type="checkbox" data-motion-reduced /><span class="wu-check-box"><svg class="wu-icon"><use href="#i-check-box"/></svg></span>Reduce motion</label>
+
+        <div class="wu-motion-effects-head">Effects</div>
+        <div class="wu-motion-effects">
+          <label class="wu-check"><input type="checkbox" checked data-motion-effect="press" /><span class="wu-check-box"><svg class="wu-icon"><use href="#i-check-box"/></svg></span>Press</label>
+          <label class="wu-check"><input type="checkbox" checked data-motion-effect="pop" /><span class="wu-check-box"><svg class="wu-icon"><use href="#i-check-box"/></svg></span>Pop</label>
+          <label class="wu-check"><input type="checkbox" checked data-motion-effect="refocus" /><span class="wu-check-box"><svg class="wu-icon"><use href="#i-check-box"/></svg></span>Refocus</label>
+          <label class="wu-check"><input type="checkbox" checked data-motion-effect="ticker" /><span class="wu-check-box"><svg class="wu-icon"><use href="#i-check-box"/></svg></span>Ticker</label>
+          <label class="wu-check"><input type="checkbox" checked data-motion-effect="stagger" /><span class="wu-check-box"><svg class="wu-icon"><use href="#i-check-box"/></svg></span>Stagger</label>
+          <label class="wu-check"><input type="checkbox" checked data-motion-effect="gesture" /><span class="wu-check-box"><svg class="wu-icon"><use href="#i-check-box"/></svg></span>Gesture</label>
+          <label class="wu-check"><input type="checkbox" checked data-motion-effect="typing" /><span class="wu-check-box"><svg class="wu-icon"><use href="#i-check-box"/></svg></span>Typing</label>
+        </div>
+
+        <div class="wu-motion-row">
+          <button class="wu-btn wu-btn--ghost wu-btn--xs" type="button" data-motion-reset>Reset</button>
+        </div>
+      </div>
+    </aside>
+
+    <div id="copyStatus" class="wu-hint" role="status" aria-live="polite" style="position:fixed;right:16px;bottom:16px;padding:7px 10px;border-radius:8px;background:var(--ds-gray-1000);color:var(--ds-background-100);opacity:0;transition:opacity 150ms var(--wu-ease);pointer-events:none"></div>
+  </body>
+</html>

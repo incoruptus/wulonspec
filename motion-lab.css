@@ -1,0 +1,351 @@
+/* Motion Lab: a scoped tuning surface. Every value is applied to the four
+   specimens in this block only; no library token or runtime default is
+   rewritten. */
+
+.wu-motion-lab {
+  --lab-duration: 160ms;
+  --lab-indicator: 160ms;
+  display: grid;
+  grid-template-columns: minmax(270px, 0.82fr) minmax(0, 1.5fr);
+  gap: 14px;
+  align-items: stretch;
+}
+
+.wu-lab-controls {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+}
+
+.wu-lab-control-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 16px;
+}
+
+.wu-lab-control {
+  min-width: 0;
+}
+
+.wu-lab-control-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 5px;
+}
+
+.wu-lab-control-head label {
+  color: var(--ds-gray-900);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 17px;
+}
+
+.wu-lab-control-head output {
+  color: var(--ds-gray-700);
+  font-family: var(--wu-font-mono);
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+.wu-lab-control .wu-range-wrap {
+  width: 100%;
+}
+
+.wu-lab-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.wu-lab-actions .wu-hint {
+  margin: 0;
+  font-size: 11px;
+  line-height: 16px;
+}
+
+.wu-lab-map {
+  display: grid;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid var(--ds-gray-300);
+}
+
+.wu-lab-map div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.wu-lab-map span {
+  color: var(--ds-gray-700);
+  font-size: 11px;
+  line-height: 16px;
+}
+
+.wu-lab-map code {
+  color: var(--ds-gray-600);
+  font-family: var(--wu-font-mono);
+  font-size: 9px;
+  line-height: 15px;
+  text-align: right;
+}
+
+.wu-lab-specimens {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  min-width: 0;
+}
+
+.wu-lab-specimen {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  padding: 14px;
+}
+
+.wu-lab-specimen-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  color: var(--ds-gray-700);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.wu-lab-specimen-head code {
+  color: var(--ds-gray-600);
+  font-family: var(--wu-font-mono);
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  white-space: nowrap;
+}
+
+.wu-lab-specimen .wu-hint {
+  margin: 0;
+  font-size: 11px;
+  line-height: 16px;
+}
+
+.wu-lab-specimen .wu-tabs {
+  width: 100%;
+  margin-top: auto;
+}
+
+.wu-lab-specimen .wu-tabs .wu-tab {
+  flex: 1 1 0;
+  padding-inline: 8px;
+  font-size: 12px;
+}
+
+.wu-lab-tabpanel {
+  padding-top: 6px;
+  color: var(--ds-gray-700);
+  font-size: 11px;
+  line-height: 16px;
+}
+
+.wu-lab-specimen .wu-segmented {
+  width: 100%;
+  margin-top: auto;
+}
+
+.wu-lab-specimen .wu-segmented button {
+  flex: 1 1 0;
+  padding-inline: 8px;
+  font-size: 12px;
+}
+
+/* Indicator speed is the only thing this control owns. Existing tab and
+   segmented logic still places the indicator; only its travel time changes. */
+.wu-motion-lab .wu-tab-indicator,
+.wu-motion-lab .wu-segmented-indicator {
+  transition-duration: var(--lab-indicator);
+}
+
+.wu-lab-sheet-stage {
+  position: relative;
+  height: 190px;
+  overflow: hidden;
+  border: 1px solid var(--ds-gray-300);
+  border-radius: 10px;
+  background:
+    linear-gradient(var(--ds-gray-200) 1px, transparent 1px) 0 0 / 100% 24px,
+    var(--ds-gray-100);
+  touch-action: pan-y;
+}
+
+.wu-lab-sheet-open {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+}
+
+.wu-lab-sheet {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  padding: 4px 14px 14px;
+  border-radius: 12px 12px 0 0;
+  background: var(--ds-background-100);
+  box-shadow: 0 -8px 24px #0000001f;
+  transform: translate3d(0, calc(100% + 10px), 0);
+  transition: transform var(--lab-duration) var(--wu-ease-out);
+  will-change: transform;
+}
+
+.wu-lab-sheet.is-open {
+  transform: translate3d(0, 0, 0);
+}
+
+.wu-lab-sheet.is-dragging {
+  transition: none;
+}
+
+.wu-lab-sheet-handle {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: grab;
+  touch-action: none;
+}
+
+.wu-lab-sheet-handle:active {
+  cursor: grabbing;
+}
+
+.wu-lab-sheet-handle span {
+  display: block;
+  width: 36px;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--ds-gray-400);
+}
+
+.wu-lab-sheet-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.wu-lab-kicker {
+  color: var(--ds-gray-600);
+  font-size: 9px;
+  font-weight: 600;
+  line-height: 14px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.wu-lab-sheet-body strong,
+.wu-lab-card strong {
+  color: var(--ds-gray-1000);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+}
+
+.wu-lab-sheet-body p,
+.wu-lab-card p {
+  margin: 0;
+  color: var(--ds-gray-700);
+  font-size: 11px;
+  line-height: 16px;
+}
+
+.wu-lab-sheet-body .wu-btn {
+  margin-top: 8px;
+}
+
+.wu-lab-card-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: 190px;
+  overflow: hidden;
+  border: 1px solid var(--ds-gray-300);
+  border-radius: 10px;
+  background:
+    radial-gradient(circle at 50% 50%, var(--ds-gray-100), transparent 65%),
+    var(--ds-gray-100);
+  touch-action: pan-y;
+}
+
+.wu-lab-card {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: min(190px, 82%);
+  padding: 14px;
+  border: 1px solid var(--ds-gray-300);
+  border-radius: 12px;
+  background: var(--ds-background-100);
+  box-shadow: var(--wu-shadow-border);
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  will-change: transform;
+}
+
+.wu-lab-card:focus-visible {
+  outline: 2px solid var(--ds-focus-color);
+  outline-offset: 2px;
+}
+
+.wu-lab-card:active {
+  cursor: grabbing;
+}
+
+.wu-lab-card-stage .wu-btn[data-lab-card-reset] {
+  position: absolute;
+  z-index: 2;
+}
+
+@media (max-width: 960px) {
+  .wu-motion-lab {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .wu-lab-control-grid,
+  .wu-lab-specimens {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+html[data-motion="reduced"] .wu-motion-lab,
+html[data-motion="off"] .wu-motion-lab {
+  --lab-duration: 0ms !important;
+  --lab-indicator: 0ms !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wu-motion-lab {
+    --lab-duration: 0ms !important;
+    --lab-indicator: 0ms !important;
+  }
+}
